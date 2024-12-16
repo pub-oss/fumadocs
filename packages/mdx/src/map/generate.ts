@@ -10,6 +10,7 @@ import {
 
 export async function generateJS(
   configPath: string,
+  // config 文件是通过 esbuild 构建到 ~/.source/source.config.mjs 并直接通过 import 导入的模块内容
   config: LoadedConfig,
   outputPath: string,
   hash: string,
@@ -26,8 +27,10 @@ export async function generateJS(
   const importedCollections = new Set<string>();
 
   config._runtime.files.clear();
+  // 
   const entries = Array.from(config.collections.entries());
   const declares = entries.map(async ([k, collection]) => {
+    // pr 被拒绝了 https://github.com/fuma-nama/fumadocs/issues/1165
     const files = await getCollectionFiles(collection);
     const items = files.map(async (file, i) => {
       config._runtime.files.set(file.absolutePath, k);

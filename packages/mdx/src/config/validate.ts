@@ -20,6 +20,7 @@ export function validateConfig(
       continue;
     }
 
+    // packages/mdx/src/config/define.ts::defineCollections
     if (typeof v === 'object' && '_doc' in v && v._doc === 'collections') {
       out.collections.set(
         k,
@@ -28,6 +29,7 @@ export function validateConfig(
       continue;
     }
 
+    // source.config.ts 中的 export default defineConfig({...})
     if (k === 'default') {
       out.global = v as GlobalConfig;
       continue;

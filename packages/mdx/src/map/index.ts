@@ -18,6 +18,7 @@ export async function start(
   outDir: string,
 ): Promise<void> {
   let configHash = await getConfigHash(configPath);
+  // packages/mdx/src/config/validate.ts::validateConfig
   let config = await loadConfigCached(configPath, configHash);
   const manifestPath = path.resolve(outDir, 'manifest.json');
   const jsOut = path.resolve(outDir, `index.js`);
